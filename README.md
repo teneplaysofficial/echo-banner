@@ -44,3 +44,11 @@ Generate a formatted banner string. See the [API docs](https://teneplaysofficial
 ```ts
 banner(options: BannerOptions): string
 ```
+
+### `print(options)`
+
+Prints a stylized ASCII banner for CLI applications. See the [API docs](https://teneplaysofficial.github.io/echo-banner/functions/print.html)
+
+```ts
+print(options: PrintOptions): Promise<void>
+```

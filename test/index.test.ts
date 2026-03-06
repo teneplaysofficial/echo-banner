@@ -1,6 +1,13 @@
-import { beforeEach, describe, expect, it } from 'vitest';
-import { banner } from '@/lib';
+import figlet from 'figlet';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { banner, print } from '@/lib';
 import pkg from '../package.json';
+
+vi.mock('figlet', () => ({
+  default: {
+    text: vi.fn(),
+  },
+}));
 
 const year = new Date().getFullYear();
 
@@ -161,5 +168,129 @@ describe('banner', () => {
 
   it('throws error when pkg is invalid', () => {
     expect(() => banner({ pkg: null as unknown as object })).toThrow(TypeError);
+  });
+});
+
+describe('print', () => {
+  const mockConsole = vi.spyOn(console, 'log').mockImplementation(() => {});
+
+  beforeEach(() => {
+    vi.clearAllMocks();
+  });
+
+  it('prints banner', async () => {
+    vi.mocked(figlet.text).mockResolvedValue(
+      `AAA
+BBB`,
+    );
+
+    await print({ pkg });
+
+    expect(figlet.text).toHaveBeenCalledWith(pkg.displayName, { font: 'Slant' });
+
+    expect(mockConsole).toHaveBeenCalledTimes(1);
+
+    const output = mockConsole.mock.calls[0]?.[0];
+
+    expect(output).toContain('AAA');
+    expect(output).toContain('BBB');
+    expect(output).toMatch(pkg.version);
+  });
+
+  it('prints banner without version', async () => {
+    vi.mocked(figlet.text).mockResolvedValue(
+      `AAA
+BBB`,
+    );
+
+    await print({
+      pkg,
+      useVersion: false,
+    });
+
+    expect(mockConsole).toHaveBeenCalledWith(`AAA\nBBB`);
+  });
+
+  it('uses pkg.name when useDisplayName when disabled', async () => {
+    vi.mocked(figlet.text).mockResolvedValue('AAA');
+
+    await print({
+      pkg,
+      useDisplayName: false,
+    });
+
+    expect(figlet.text).toHaveBeenCalledWith(pkg.name, { font: 'Slant' });
+  });
+
+  it('use custom version prefix', async () => {
+    vi.mocked(figlet.text).mockResolvedValue(
+      `AAA
+BBB`,
+    );
+
+    await print({
+      pkg,
+      prefixVersion: 'ver-',
+    });
+
+    const output = mockConsole.mock.calls[0]?.[0];
+
+    expect(output).toContain(`ver-${pkg.version}`);
+  });
+
+  it('prints without version when pkg.version missing', async () => {
+    vi.mocked(figlet.text).mockResolvedValue('AAA');
+
+    await print({
+      pkg: { name: 'testpkg' },
+    });
+
+    expect(mockConsole).toHaveBeenCalledWith('AAA');
+  });
+
+  it('does nothing if name is missing', async () => {
+    await print({
+      pkg: {},
+    });
+
+    expect(figlet.text).not.toHaveBeenCalled();
+    expect(mockConsole).not.toHaveBeenCalled();
+  });
+
+  it('handles figlet output with empty lines', async () => {
+    vi.mocked(figlet.text).mockResolvedValue(
+      `AAA
+
+BBB`,
+    );
+
+    await print({ pkg });
+
+    const output = mockConsole.mock.calls[0]?.[0];
+
+    expect(output).toContain(`v${pkg.version}`);
+  });
+
+  it('uses custom font', async () => {
+    vi.mocked(figlet.text).mockResolvedValue('AAA');
+
+    await print({
+      pkg,
+      font: 'Standard',
+    });
+
+    expect(figlet.text).toHaveBeenCalledWith(pkg.displayName, {
+      font: 'Standard',
+    });
+  });
+
+  it('prints raw data when figlet output has no visible characters', async () => {
+    vi.mocked(figlet.text).mockResolvedValue(`\n\n\n`);
+
+    await print({ pkg });
+
+    const output = mockConsole.mock.calls[0]?.[0];
+
+    expect(output).toBe(`\n\n\n`);
   });
 });

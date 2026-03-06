@@ -1,4 +1,5 @@
 import { EOL } from 'node:os';
+import figlet from 'figlet';
 import type { PackageJson, SHEBANG } from 'js-utils-kit';
 
 type Shebang = (typeof SHEBANG)[keyof typeof SHEBANG];
@@ -144,4 +145,140 @@ export function banner({
   }
 
   return res;
+}
+
+type FontName =
+  | '1Row'
+  | '3-D'
+  | '3D Diagonal'
+  | '3D-ASCII'
+  | '3x5'
+  | '4Max'
+  | '5 Line Oblique'
+  | 'Standard'
+  | 'Ghost'
+  | 'Big'
+  | 'Block'
+  | 'Bubble'
+  | 'Digital'
+  | 'Ivrit'
+  | 'Mini'
+  | 'Script'
+  | 'Shadow'
+  | 'Slant'
+  | 'Small'
+  | 'Speed'
+  | 'Tinker-Toy';
+
+/**
+ * Prints a stylized banner of a package name using a FIGlet font.
+ *
+ * The banner can optionally include the package version appended to the last visible line of the generated ASCII text.
+ *
+ * This is useful for CLI tools to display a startup banner with project name and version.
+ *
+ * @remarks
+ * - If `displayName` is available and `useDisplayName` is `true`, it will be used instead of `name`.
+ * - If `useVersion` is enabled and `pkg.version` exists, the version will be aligned to the
+ *   right side of the banner's last visible line.
+ * - If the banner contains no printable lines, the raw FIGlet output is printed.
+ *
+ * @example
+ * ```ts
+ * import { print } from "echo-banner";
+ * import pkg from "../package.json";
+ *
+ * await print({
+ *   pkg,
+ *   font: "Slant"
+ * });
+ * ```
+ *
+ * @example Custom version prefix
+ * ```ts
+ * await print({
+ *   pkg,
+ *   prefixVersion: "@",
+ * });
+ * ```
+ *
+ * @example Disable version output
+ * ```ts
+ * await print({
+ *   pkg,
+ *   useVersion: false
+ * });
+ * ```
+ *
+ * @example Use package name instead of display name
+ * ```ts
+ * await print({
+ *   pkg,
+ *   useDisplayName: false
+ * });
+ * ```
+ */
+export async function print({
+  pkg,
+  useVersion = true,
+  useDisplayName = true,
+  prefixVersion = 'v',
+  font = 'Slant',
+}: {
+  /** Package metadata containing the name, optional display name, and version. */
+  pkg: Pick<PackageMeta, 'name' | 'displayName' | 'version'>;
+  /**
+   * Whether to append the version to the banner.
+   *
+   * @default true
+   */
+  useVersion?: boolean;
+  /**
+   * Prefer `displayName` over `name` when available.
+   *
+   * @default true
+   */
+  useDisplayName?: boolean;
+  /**
+   * Prefix added before the version string.
+   *
+   * @default "v"
+   *
+   * @example "v1.0.0"
+   */
+  prefixVersion?: string;
+  /**
+   * Figlet font used to render the banner.
+   *
+   * @default "Slant"
+   */
+  font?: FontName;
+}) {
+  const name = useDisplayName ? pkg.displayName || pkg.name : pkg.name;
+  if (!name) return;
+
+  const data = await figlet.text(name, { font });
+
+  if (!useVersion || !pkg.version) {
+    console.log(data);
+    return;
+  }
+
+  const lines = data.split(EOL);
+  const versionText = `${prefixVersion}${pkg.version}`;
+
+  const lastLineIndex = lines.findLastIndex((l) => l.trim().length > 0);
+  if (lastLineIndex < 0) {
+    console.log(data);
+    return;
+  }
+
+  const maxWidth = Math.max(...lines.map((l) => l.trimEnd().length));
+  const lastLine = lines[lastLineIndex]!.trimEnd();
+  const GAP = 2;
+  const padding = maxWidth - lastLine.length + GAP;
+
+  lines[lastLineIndex] = lastLine + ' '.repeat(padding) + versionText;
+
+  console.log(lines.join(EOL));
 }
