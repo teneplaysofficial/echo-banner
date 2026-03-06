@@ -1,7 +1,7 @@
 {
   "name": "echo-banner",
   "displayName": "Echo Banner",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Generate multiline build banners and ASCII CLI titles",
   "keywords": [
     "cli",
