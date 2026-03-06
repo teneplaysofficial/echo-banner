@@ -15,6 +15,51 @@ type PackageMeta = Pick<
   | 'repository'
 >;
 
+/**
+ * Generate a production banner comment from package metadata.
+ *
+ * @remarks
+ * This utility creates a formatted banner typically used at the top of bundled files (e.g., Rollup, tsdown, esbuild, webpack outputs).
+ *
+ * The banner includes:
+ * - Package name or display name
+ * - Version (with optional prefix)
+ * - Description
+ * - Copyright
+ * - License
+ * - Homepage
+ * - Repository URL
+ *
+ * Repository URLs are normalized by removing common prefixes such as `git+` and suffixes like `.git`.
+ *
+ * @returns A formatted banner string suitable for insertion at the top of bundled files.
+ *
+ * @throws {TypeError} Thrown if the provided `pkg` value is not a valid object.
+ *
+ * @example Basic usage
+ * ```ts
+ * import pkg from "../package.json";
+ *
+ * const text = banner({ pkg });
+ * console.log(text);
+ * ```
+ *
+ * @example With shebang for CLI tools
+ * ```ts
+ * const text = banner({
+ *   pkg,
+ *   shebang: "#!/usr/bin/env node"
+ * });
+ * ```
+ *
+ * @example Using display name
+ * ```ts
+ * const text = banner({
+ *   pkg,
+ *   useDisplayName: true
+ * });
+ * ```
+ */
 export function banner({
   pkg,
   shebang = false,
@@ -26,11 +71,32 @@ export function banner({
     version: '0.0.0',
   },
 }: {
+  /** Package metadata used to construct the banner */
   pkg: PackageMeta;
+  /**
+   * Optional shebang line (for CLI binaries).
+   *
+   * @default false
+   */
   shebang?: Shebang | false;
+  /**
+   * Banner comment style.
+   *
+   * Currently supports:
+   * - `js`
+   *
+   * @default "js"
+   */
   style?: 'js';
+  /** Prefer `displayName` over `name` when available */
   useDisplayName?: boolean;
+  /**
+   * Prefix applied before the version.
+   *
+   * @default "v"
+   */
   prefixVersion?: string;
+  /** Fallback values when `name` or `version` are missing */
   fallback?: {
     name?: string;
     version?: string;

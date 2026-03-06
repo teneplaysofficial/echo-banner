@@ -39,19 +39,8 @@ console.log(result);
 
 ### `banner(options)`
 
-Generate a formatted banner string.
+Generate a formatted banner string. See the [API docs](https://teneplaysofficial.github.io/echo-banner/functions/banner.html)
 
 ```ts
 banner(options: BannerOptions): string
 ```
-
-#### Options
-
-| Option           | Type                                  | Default                                 | Description                                                    |
-| ---------------- | ------------------------------------- | --------------------------------------- | -------------------------------------------------------------- |
-| `pkg`            | `PackageMeta`                         | **required**                            | Package metadata (usually imported from `package.json`).       |
-| `shebang`        | `string \| false`                     | `false`                                 | Adds a shebang line before the banner (useful for CLI builds). |
-| `style`          | `'js'`                                | `'js'`                                  | Banner comment style.                                          |
-| `useDisplayName` | `boolean`                             | `false`                                 | Use `displayName` instead of `name`.                           |
-| `prefixVersion`  | `string`                              | `'v'`                                   | Prefix added before the version.                               |
-| `fallback`       | `{ name?: string; version?: string }` | `{ name: 'unknown', version: '0.0.0' }` | Fallback values when metadata is missing.                      |

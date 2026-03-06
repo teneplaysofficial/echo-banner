@@ -1,0 +1,11 @@
+{
+  "entryPoints": ["./lib/index.ts"],
+  "entryPointStrategy": "expand",
+  "sort": ["alphabetical"],
+  "readme": "./README.md",
+  "gitRemote": "origin",
+  "gitRevision": "main",
+  "githubPages": true,
+  "hideGenerator": true,
+  "name": "Echo Banner"
+}

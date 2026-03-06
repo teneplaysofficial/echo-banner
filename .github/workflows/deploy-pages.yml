@@ -1,0 +1,38 @@
+name: Deploy Pages
+
+permissions:
+  pages: write
+  id-token: write
+
+on:
+  push:
+    branches: ['main']
+  workflow_dispatch:
+  workflow_call:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v6
+      - uses: ./.github/actions/setup
+      - name: Build documentation
+        run: pnpm build:docs
+      - name: Run tests
+        run: pnpm vitest run --coverage
+      - name: Copy files to docs
+        run: |
+          mkdir -p docs/coverage
+          cp -r coverage/* docs/coverage/
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+      - name: Upload documentation artifact
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: ./docs
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

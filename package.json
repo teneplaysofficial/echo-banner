@@ -41,6 +41,7 @@
   },
   "scripts": {
     "build": "tsdown",
+    "build:docs": "typedoc",
     "fmt": "prettier --write .",
     "fmt:check": "prettier --check .",
     "lint": "biome check",
@@ -63,6 +64,7 @@
     "lint-staged": "^16.3.2",
     "prettier": "^3.8.1",
     "tsdown": "^0.20.3",
+    "typedoc": "^0.28.17",
     "typescript": "^5.9.3",
     "vitest": "^4.0.18"
   },
