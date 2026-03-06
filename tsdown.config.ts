@@ -1,4 +1,6 @@
 import { defineConfig } from 'tsdown';
+import { banner } from './lib/index.ts';
+import pkg from './package.json' with { type: 'json' };
 
 export default defineConfig([
   {
@@ -8,5 +10,10 @@ export default defineConfig([
     dts: true,
     minify: true,
     exports: true,
+    banner: {
+      js: banner({
+        pkg,
+      }),
+    },
   },
 ]);
