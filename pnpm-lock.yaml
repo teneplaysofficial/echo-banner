@@ -13,6 +13,9 @@ importers:
       js-utils-kit:
         specifier: ^2.1.0
         version: 2.1.0
+      use-colors:
+        specifier: ^0.1.0
+        version: 0.1.0
     devDependencies:
       '@biomejs/biome':
         specifier: ^2.4.5
@@ -502,6 +505,13 @@ packages:
       }
     engines: { node: '>=22' }
 
+  '@js-utils-kit/array@0.6.0':
+    resolution:
+      {
+        integrity: sha512-+rTTh9IovhPSSeVavPA312NfXbLtGivJ1BvJ75UWAy9+ro79wOgZuch0sY1vQXrdbZeSSkrPFXfaMFiYYefoPg==,
+      }
+    engines: { node: '>=22' }
+
   '@js-utils-kit/charset@1.0.0':
     resolution:
       {
@@ -516,10 +526,24 @@ packages:
       }
     engines: { node: '>=22' }
 
+  '@js-utils-kit/constants@0.4.0':
+    resolution:
+      {
+        integrity: sha512-p2yXcuSdYwSHIOD9Uju65vGLaShQiWoyybJgMbcihltG6RIIvg8/Yo9k9uGmkr6Onehl4hoQL6fji3mcH2cFqg==,
+      }
+    engines: { node: '>=22' }
+
   '@js-utils-kit/core@2.1.0':
     resolution:
       {
         integrity: sha512-/XpvOHfBV48+uUn60AucxZ0H0ytwjbxMQJr7SRt/v2yRxMe6e8RQRlHM095fxZY2TLI+Jg34ovZOpGlr9iFHZw==,
+      }
+    engines: { node: '>=22' }
+
+  '@js-utils-kit/core@2.3.0':
+    resolution:
+      {
+        integrity: sha512-aDoerDrw553K1Wt2ENa+QVmAPrYM9vi5U3PAtVf9BNZsSKGWqtp3B53nhPUJEMz5GJ1L3OqzpdA/TtaGpZ8wKA==,
       }
     engines: { node: '>=22' }
 
@@ -530,10 +554,24 @@ packages:
       }
     engines: { node: '>=22' }
 
+  '@js-utils-kit/env@1.7.0':
+    resolution:
+      {
+        integrity: sha512-O1F3RF2rtuHQ1zSwRd2lv0pgRp0tsvEe/BDslDDLK9fHGos1CriF3KhLVBjTtWYXgYrhmWNiTog7qxyfHaHSbw==,
+      }
+    engines: { node: '>=22' }
+
   '@js-utils-kit/fs@1.5.0':
     resolution:
       {
         integrity: sha512-VcuwG1OFfj42+EDxq8ZWzXo/bERqhKb8t61uCQ1tb2qBUht93O3x1KRelD40h4qq8iztC4YTTbsGyAMXaSCYXw==,
+      }
+    engines: { node: '>=22' }
+
+  '@js-utils-kit/fs@1.6.0':
+    resolution:
+      {
+        integrity: sha512-4VtKMgp/fYDNeXwzUzJyauk0MNAi1hYrsg65aO+N+RFjnyllhjdJwYZdHuTyx7cwm0or2VXUa7Os54FW02+jNA==,
       }
     engines: { node: '>=22' }
 
@@ -544,10 +582,24 @@ packages:
       }
     engines: { node: '>=22' }
 
+  '@js-utils-kit/number@1.5.0':
+    resolution:
+      {
+        integrity: sha512-wZdPjA/rGNQGaiPPH8RZGpuUOW/kzu5aJbmp5q3gOAncp9gXykx+MDOcau9YBjr6xTkM4Wb6/mK54nVrw01JmQ==,
+      }
+    engines: { node: '>=22' }
+
   '@js-utils-kit/object@1.1.0':
     resolution:
       {
         integrity: sha512-X6wQPiSJ5Hdml9iwB35PBXLn1aBt93RLa7Tx9qpk4WctM34HkBlg/ufbEapQDsuaCq0TIMvWnfZTH2LvF3Mo/A==,
+      }
+    engines: { node: '>=22' }
+
+  '@js-utils-kit/object@1.2.1':
+    resolution:
+      {
+        integrity: sha512-NCFpj2rYIL5zBxvKmtfEIm1NmjoE6CmU5wkiqdvanODKHBWcoMx/acRbtbMyWHtYv5TV3VK6QpX2Ra0js6PzTA==,
       }
     engines: { node: '>=22' }
 
@@ -558,10 +610,24 @@ packages:
       }
     engines: { node: '>=22' }
 
+  '@js-utils-kit/pm@0.2.0':
+    resolution:
+      {
+        integrity: sha512-kI1G24bbCgffEC903cHWYoPw+KTuiV0gY9/cN2d4GhbEjvfkjWx9PMeVMkgpW7WbNTNwL505gkHRRzijXsy9tw==,
+      }
+    engines: { node: '>=22' }
+
   '@js-utils-kit/string@1.4.0':
     resolution:
       {
         integrity: sha512-/jBkv1f9Astsry/xHW4ajrMlY6bDF/SH56EGUW4d9LKYRybcGpzsPWIBvVGSymnA+IE4HdxfP9ZSZw65kiUx2Q==,
+      }
+    engines: { node: '>=22' }
+
+  '@js-utils-kit/string@1.5.0':
+    resolution:
+      {
+        integrity: sha512-N9y+2myJexBJp2vOF4qoSFQXRtpuUONP+jCtKYLF4hhG8MhHeWWranX1eZVOoXvfj8KX4EIhlJ4ZWmCXTEqpgw==,
       }
     engines: { node: '>=22' }
 
@@ -576,6 +642,13 @@ packages:
     resolution:
       {
         integrity: sha512-ssqCn6gVkq5wlTIo35XCv8EXwbxWRKQMVEbBmwU4gi4vO+mIsaHwtj39sr9HYNhWFLuSGFXjFKXTxJhF5gcHhw==,
+      }
+    engines: { node: '>=22' }
+
+  '@js-utils-kit/types@1.5.0':
+    resolution:
+      {
+        integrity: sha512-nhv6b7Uj2SbEv8mn4CiZvkMbIRCMDgzMREN2W1eqTpQOJjqg3WvCbIXDV58F9teN4EAPUxZQbxfiarBpqXA0yQ==,
       }
     engines: { node: '>=22' }
 
@@ -1889,6 +1962,12 @@ packages:
         integrity: sha512-btz8hHa8RFp42rkqAQRvLrbfjbfBGguxONb487NqPGWWgkauYA1MY5U/Wtwo0745/6Peplu3/efaO/DlypVwEg==,
       }
 
+  js-utils-kit@2.3.0:
+    resolution:
+      {
+        integrity: sha512-4PFlEmGwXLdxeGxdPQTF1111SCp7bOA33GvRO1NFOfFIveJxT0sdZS0y9vMcvtIXTUnmovCNNVgBpgk9SHEq6A==,
+      }
+
   jsesc@3.1.0:
     resolution:
       {
@@ -2551,6 +2630,13 @@ packages:
       synckit:
         optional: true
 
+  use-colors@0.1.0:
+    resolution:
+      {
+        integrity: sha512-O/AzHHulzEDkJQqB6HrO1aQj58GfTHS5sEUr2LmuDNBklD6Khcwm+MOKgh1thdzpprW3q2WcaDb9u+fp+BO1mQ==,
+      }
+    engines: { node: '>=22' }
+
   util-deprecate@1.0.2:
     resolution:
       {
@@ -2891,11 +2977,19 @@ snapshots:
     dependencies:
       '@js-utils-kit/types': 1.4.0
 
+  '@js-utils-kit/array@0.6.0':
+    dependencies:
+      '@js-utils-kit/types': 1.5.0
+
   '@js-utils-kit/charset@1.0.0': {}
 
   '@js-utils-kit/constants@0.3.0':
     dependencies:
       '@js-utils-kit/types': 1.4.0
+
+  '@js-utils-kit/constants@0.4.0':
+    dependencies:
+      '@js-utils-kit/types': 1.5.0
 
   '@js-utils-kit/core@2.1.0':
     dependencies:
@@ -2916,9 +3010,33 @@ snapshots:
       - bare-buffer
       - react-native-b4a
 
+  '@js-utils-kit/core@2.3.0':
+    dependencies:
+      '@js-utils-kit/array': 0.6.0
+      '@js-utils-kit/charset': 1.0.0
+      '@js-utils-kit/constants': 0.4.0
+      '@js-utils-kit/env': 1.7.0
+      '@js-utils-kit/fs': 1.6.0
+      '@js-utils-kit/number': 1.5.0
+      '@js-utils-kit/object': 1.2.1
+      '@js-utils-kit/pm': 0.2.0
+      '@js-utils-kit/string': 1.5.0
+      '@js-utils-kit/system': 1.0.0
+      '@js-utils-kit/types': 1.5.0
+      '@js-utils-kit/valid': 2.0.0
+    transitivePeerDependencies:
+      - bare-abort-controller
+      - bare-buffer
+      - react-native-b4a
+
   '@js-utils-kit/env@1.6.0':
     dependencies:
       '@js-utils-kit/types': 1.4.0
+
+  '@js-utils-kit/env@1.7.0':
+    dependencies:
+      '@js-utils-kit/system': 1.0.0
+      '@js-utils-kit/types': 1.5.0
 
   '@js-utils-kit/fs@1.5.0':
     dependencies:
@@ -2929,11 +3047,29 @@ snapshots:
       - bare-buffer
       - react-native-b4a
 
+  '@js-utils-kit/fs@1.6.0':
+    dependencies:
+      '@js-utils-kit/types': 1.5.0
+      archiver: 7.0.1
+    transitivePeerDependencies:
+      - bare-abort-controller
+      - bare-buffer
+      - react-native-b4a
+
   '@js-utils-kit/number@1.4.0':
     dependencies:
       '@js-utils-kit/types': 1.4.0
 
+  '@js-utils-kit/number@1.5.0':
+    dependencies:
+      '@js-utils-kit/types': 1.5.0
+
   '@js-utils-kit/object@1.1.0': {}
+
+  '@js-utils-kit/object@1.2.1':
+    dependencies:
+      '@js-utils-kit/types': 1.5.0
+      '@js-utils-kit/valid': 2.0.0
 
   '@js-utils-kit/pm@0.1.0':
     dependencies:
@@ -2944,13 +3080,28 @@ snapshots:
       - bare-buffer
       - react-native-b4a
 
+  '@js-utils-kit/pm@0.2.0':
+    dependencies:
+      '@js-utils-kit/fs': 1.6.0
+      '@js-utils-kit/types': 1.5.0
+    transitivePeerDependencies:
+      - bare-abort-controller
+      - bare-buffer
+      - react-native-b4a
+
   '@js-utils-kit/string@1.4.0':
     dependencies:
       '@js-utils-kit/types': 1.4.0
 
+  '@js-utils-kit/string@1.5.0':
+    dependencies:
+      '@js-utils-kit/types': 1.5.0
+
   '@js-utils-kit/system@1.0.0': {}
 
   '@js-utils-kit/types@1.4.0': {}
+
+  '@js-utils-kit/types@1.5.0': {}
 
   '@js-utils-kit/valid@2.0.0': {}
 
@@ -3581,6 +3732,14 @@ snapshots:
       - bare-buffer
       - react-native-b4a
 
+  js-utils-kit@2.3.0:
+    dependencies:
+      '@js-utils-kit/core': 2.3.0
+    transitivePeerDependencies:
+      - bare-abort-controller
+      - bare-buffer
+      - react-native-b4a
+
   jsesc@3.1.0: {}
 
   lazystream@1.0.1:
@@ -4032,6 +4191,14 @@ snapshots:
       rolldown: 1.0.0-rc.6
     optionalDependencies:
       synckit: 0.11.12
+
+  use-colors@0.1.0:
+    dependencies:
+      js-utils-kit: 2.3.0
+    transitivePeerDependencies:
+      - bare-abort-controller
+      - bare-buffer
+      - react-native-b4a
 
   util-deprecate@1.0.2: {}
 

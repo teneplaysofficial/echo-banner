@@ -1,6 +1,7 @@
 import { EOL } from 'node:os';
 import figlet from 'figlet';
 import type { PackageJson, SHEBANG } from 'js-utils-kit';
+import colors from 'use-colors';
 
 type Shebang = (typeof SHEBANG)[keyof typeof SHEBANG];
 
@@ -182,6 +183,7 @@ type FontName =
  * - If `useVersion` is enabled and `pkg.version` exists, the version will be aligned to the
  *   right side of the banner's last visible line.
  * - If the banner contains no printable lines, the raw FIGlet output is printed.
+ * - If `color` is disabled, all ANSI styling is turned off.
  *
  * @example
  * ```ts
@@ -217,6 +219,14 @@ type FontName =
  *   useDisplayName: false
  * });
  * ```
+ *
+ * @example Disable colors
+ * ```ts
+ * await print({
+ *   pkg,
+ *   color: false
+ * });
+ * ```
  */
 export async function print({
   pkg,
@@ -224,6 +234,7 @@ export async function print({
   useDisplayName = true,
   prefixVersion = 'v',
   font = 'Slant',
+  color = true,
 }: {
   /** Package metadata containing the name, optional display name, and version. */
   pkg: Pick<PackageMeta, 'name' | 'displayName' | 'version'>;
@@ -253,23 +264,33 @@ export async function print({
    * @default "Slant"
    */
   font?: FontName;
+  /**
+   * Enable or disable colored output.
+   *
+   * @default true
+   */
+  color?: boolean;
 }) {
   const name = useDisplayName ? pkg.displayName || pkg.name : pkg.name;
   if (!name) return;
+  if (!color)
+    colors.config({
+      level: 0,
+    });
 
   const data = await figlet.text(name, { font });
 
   if (!useVersion || !pkg.version) {
-    console.log(data);
+    console.log(colors.cyanBright(data));
     return;
   }
 
   const lines = data.split(EOL);
-  const versionText = `${prefixVersion}${pkg.version}`;
+  const versionText = colors.gray`${prefixVersion}${pkg.version}`;
 
   const lastLineIndex = lines.findLastIndex((l) => l.trim().length > 0);
   if (lastLineIndex < 0) {
-    console.log(data);
+    console.log(colors.cyanBright(data));
     return;
   }
 
@@ -278,7 +299,7 @@ export async function print({
   const GAP = 2;
   const padding = maxWidth - lastLine.length + GAP;
 
-  lines[lastLineIndex] = lastLine + ' '.repeat(padding) + versionText;
+  lines[lastLineIndex] = colors.cyanBright(lastLine) + ' '.repeat(padding) + versionText;
 
   console.log(lines.join(EOL));
 }
