@@ -28,7 +28,7 @@ jobs:
           mkdir -p docs/coverage
           cp -r coverage/* docs/coverage/
       - name: Configure Pages
-        uses: actions/configure-pages@v5
+        uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6
       - name: Upload documentation artifact
         uses: actions/upload-pages-artifact@v4
         with:
